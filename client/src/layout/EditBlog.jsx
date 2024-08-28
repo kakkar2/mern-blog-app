@@ -25,12 +25,16 @@ const EditBlog = () => {
 
   //taking image from user and uploading to the cloudinary
   const handleUpload = async () => {
-    if (!image) return console.log("image not found");
-    const imageFormData = new FormData();
-    imageFormData.append("file", image);
-    imageFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
-    const result = await handleImageUpload(imageFormData);
-    return result;
+    try {
+      if (!image) return console.log("image not found");
+      const imageFormData = new FormData();
+      imageFormData.append("file", image);
+      imageFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+      const result = await handleImageUpload(imageFormData);
+      return result.secure_url;
+    } catch (error) {
+      console.log("error occur while uploading the image");
+    }
   };
 
   //generating local image so that user can see the image
@@ -39,28 +43,35 @@ const EditBlog = () => {
     setLocalImageUrl(URL.createObjectURL(e.target.files[0]));
   };
 
+  //sending data to backend
+  const handleData = async (data) => {
+    const serverData = await handlePOSTData(
+      `/blog/update-blog/${formData._id}`,
+      data,
+      "PUT"
+    );
+    if (serverData.success == true) {
+      navigate(`/blog/${serverData.slug}`);
+    } else {
+      console.log(serverData.message);
+    }
+  };
+
   //updating blog post
   const handleUpdateBlog = async (e) => {
     e.preventDefault();
-    //before sending blog post data to database first we will save the image in cloudinary
-    if (image) {
-      const thumbnailUrl = await handleUpload();
-      setFormData({
-        ...formData,
-        thumbnail: thumbnailUrl.secure_url,
-      });
+    const result = new FormData();
+    for (let [key, value] of Object.entries(formData)) {
+      result.append(key, value);
     }
-    if (image && formData.thumbnail) {
-      const serverData = await handlePOSTData(
-        `/blog/update-blog/${formData._id}`,
-        formData,
-        "PUT"
-      );
-      if (serverData.success == true) {
-        navigate(`/blog/${serverData.slug}`);
-      } else {
-        console.log(serverData.message);
+    if (image) {
+      const imageUrl = await handleUpload();
+      if (imageUrl != formData.thumbnail) {
+        result.append("thumbnail", imageUrl);
+        handleData(Object.fromEntries(result.entries()));
       }
+    } else {
+      handleData(Object.fromEntries(result.entries()));
     }
   };
 
@@ -73,6 +84,7 @@ const EditBlog = () => {
         `/blog/all-blogs?postId=${blogId}`
       );
       if (serverData.success == true) {
+        console.log(serverData.blogs[0]);
         setFormData(serverData.blogs[0]);
         setLocalImageUrl(serverData?.blogs[0]?.thumbnail);
       } else {
@@ -84,7 +96,7 @@ const EditBlog = () => {
     }
   }, []);
   return (
-    formData && (
+    formData != {} && (
       <>
         <h2 className="font-semibold text-xl uppercase underline mb-5">
           Edit New Post

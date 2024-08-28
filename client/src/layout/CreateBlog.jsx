@@ -26,7 +26,7 @@ const CreateBlog = () => {
     imageFormData.append("file", image);
     imageFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
     const result = await handleImageUpload(imageFormData);
-    return result;
+    return result.secure_url;
   };
 
   //generating local image so that user can see the image
@@ -35,24 +35,29 @@ const CreateBlog = () => {
     setLocalImageUrl(URL.createObjectURL(e.target.files[0]));
   };
 
+  //sending data to backend
+  const handleData = async (result) => {
+    const serverData = await handlePOSTData("/blog/add-new", result);
+    if (serverData.success == true) {
+      navigate(`/blog/${serverData.slug}`);
+    } else {
+      console.log(serverData.message);
+    }
+  };
+
   //creating blog post
   const handleCreateBlog = async (e) => {
     e.preventDefault();
-    //before sending blog post data to database first we will save the image in cloudinary
+    const result = new FormData();
+    for (let [key, value] of Object.entries(formData)) {
+      result.append(key, value);
+    }
     if (image) {
       const thumbnailUrl = await handleUpload();
-      setFormData({
-        ...formData,
-        thumbnail: thumbnailUrl.secure_url,
-      });
-    }
-    if (image && formData.thumbnail) {
-      const serverData = await handlePOSTData("/blog/add-new", formData);
-      if (serverData.success == true) {
-        navigate(`/blog/${serverData.slug}`);
-      } else {
-        console.log(serverData.message);
-      }
+      result.append("thumbnail", thumbnailUrl);
+      handleData(Object.fromEntries(result.entries()));
+    } else {
+      handleData(Object.fromEntries(result.entries()));
     }
   };
   return (

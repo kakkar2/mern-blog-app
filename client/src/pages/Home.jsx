@@ -15,13 +15,14 @@ const Home = () => {
         }
       };
       fetchData();
+      console.log(serverData);
     } catch (error) {
       console.log(error.message);
     }
   }, []);
 
   return (
-    <div className="w-3/4 mx-auto">
+    <div className="w-4/5 mx-auto">
       <div className="mb-5">
         <div className="coding mb-3">
           <h1 className="font-primary font-semibold text-xl">

@@ -8,6 +8,7 @@ body {
   font-family: "Poppins", sans-serif !important;
   font-weight: 400;
   font-style: normal;
+  cursor: default;
 }
 
 .logo,
@@ -32,7 +33,8 @@ body {
   stroke: rgb(243 244 246 / 1) !important;
 }
 
-.dark form svg {
+.dark form svg,
+.dark main svg {
   stroke: rgb(243 244 246 / 1) !important;
 }
 
@@ -75,11 +77,16 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.dark .post-content pre {
+  background-color: rgb(17 24 39 / 1);
+}
+
 .post-content code {
   background-color: #ececec;
   padding: 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.9rem;
+  line-height: 2;
 }
 
 .dark .post-content code {

@@ -9,6 +9,7 @@ import {
 } from "../controllers/blogs.controller.js";
 
 const blogRoute = Router();
+
 //blogs routes
 // blogRoute.get("/admin/all-blogs", verifyToken, handleViewBlogs);
 blogRoute.get("/all-blogs", handleBlogs);

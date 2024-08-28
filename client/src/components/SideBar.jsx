@@ -57,7 +57,8 @@ const SideBar = ({ tab }) => {
               onClick={() => navigate("/dashboard?tab=blogs")}
               className={`flex items-center ${
                 (tab == "blogs" && "bg-gray-400 bg-opacity-25") ||
-                (tab == "blog-add-new" && "bg-gray-400 bg-opacity-25")
+                (tab == "blog-add-new" && "bg-gray-400 bg-opacity-25") ||
+                (tab == "edit-blog" && "bg-gray-400 bg-opacity-25")
               } px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl`}
             >
               <svg

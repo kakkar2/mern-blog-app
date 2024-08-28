@@ -5,11 +5,15 @@ import "./index.css";
 import { store, persistor } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { ThemeModeProvider } from "./layout/index.jsx";
 
 createRoot(document.getElementById("root")).render(
+  //reduxpersist is use to store the state globally in user browser for better experience
   <PersistGate persistor={persistor}>
     <Provider store={store}>
-      <App />
+      <ThemeModeProvider>
+        <App />
+      </ThemeModeProvider>
     </Provider>
   </PersistGate>
 );

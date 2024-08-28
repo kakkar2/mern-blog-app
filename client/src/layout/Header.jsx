@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { signInFailure, signoutSuccess } from "../redux/users/userSlice";
 import { handleGETData } from "../data/server";
+import { toggleTheme } from "../redux/theme/ThemeSlice";
 
-const Header = ({ siteName, dark, darkModeHandler }) => {
+const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { theme } = useSelector((state) => state.theme);
   //want to know the page name
   const location = useLocation();
   const currentPage = location.pathname;
@@ -34,10 +35,13 @@ const Header = ({ siteName, dark, darkModeHandler }) => {
   };
 
   return (
-    <div className="p-3 flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gray-800 dark:text-gray-100">
+    <div className="p-3 flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gradient-to-r from-gray-900 to-gray-800 dark:text-gray-100">
       <div className="logo cursor-pointer">
-        <h1 className="font-bold text-xl" onClick={() => navigate("/")}>
-          {siteName}
+        <h1
+          className="font-bold text-xl hover:text-theme transition-all duration-200"
+          onClick={() => navigate("/")}
+        >
+          {import.meta.env.VITE_WEBSITE_NAME}
         </h1>
       </div>
       <div className="flex gap-2 items-center">
@@ -93,16 +97,16 @@ const Header = ({ siteName, dark, darkModeHandler }) => {
         )}
         <button
           className="p-2 border dark:border-gray-600 rounded-xl"
-          onClick={() => darkModeHandler()}
+          onClick={() => dispatch(toggleTheme())}
         >
-          {!dark ? (
+          {theme == "dark" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#333"
+              stroke="#FFF"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -116,7 +120,7 @@ const Header = ({ siteName, dark, darkModeHandler }) => {
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#fff"
+              stroke="#333"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"

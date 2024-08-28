@@ -9,7 +9,7 @@ import {
 import { Alert } from "../components/index.jsx";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ siteName }) => {
+const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error: message } = useSelector((state) => state.user);
@@ -53,7 +53,7 @@ const Signup = ({ siteName }) => {
         </div>
         <div className=" w-full lg:w-1/2 mx-auto p-4">
           <div className="logo text-center text-3xl mb-10">
-            <h1 className="font-bold">{siteName}</h1>
+            <h1 className="font-bold">{import.meta.env.VITE_WEBSITE_NAME}</h1>
           </div>
 
           <div className="mt-3 text-center mb-7">
