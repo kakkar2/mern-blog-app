@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { handleGETData } from "../data/server";
 import { useSelector } from "react-redux";
-import CommentItem from "../components/commentItem";
+import CommentItem from "../components/index";
 
 const Blog = () => {
   const { slug } = useParams();
