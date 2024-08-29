@@ -44,7 +44,7 @@ const handleBlogs = async (req, res) => {
   try {
     //for search the data for certain query
     const startIndex = parseInt(req.query.startIndex) || 0;
-    const limit = parseInt(req.query.limt) || 8;
+    const limit = parseInt(req.query.limit) || 25;
     const sortDirection = req.query.order === "asc" ? 1 : -1;
 
     const blogs = await Blog.find({
@@ -61,6 +61,7 @@ const handleBlogs = async (req, res) => {
         ],
       }),
     })
+      .populate("createdBy")
       .sort({ updatedAt: sortDirection })
       .skip(startIndex)
       .limit(limit);

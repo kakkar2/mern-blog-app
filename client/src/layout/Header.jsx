@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { signInFailure, signoutSuccess } from "../redux/users/userSlice";
 import { handleGETData } from "../data/server";
 import { toggleTheme } from "../redux/theme/ThemeSlice";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const Header = () => {
   //want to know the page name
   const location = useLocation();
   const currentPage = location.pathname;
+  //to show or unshow other options
+  const [isVisible, setIsVisible] = useState(false);
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -34,8 +37,16 @@ const Header = () => {
     }
   };
 
+  const handleToggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
+  useEffect(() => {
+    if (isVisible) setIsVisible(!isVisible);
+  }, [currentPage]);
+
   return (
-    <div className="p-3 flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gradient-to-r from-gray-900 to-gray-800 dark:text-gray-100">
+    <div className="p-3 sticky top-0 z-10 bg-white flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gradient-to-r from-gray-900 to-gray-800 dark:text-gray-100">
       <div className="logo cursor-pointer">
         <h1
           className="font-bold text-xl hover:text-theme transition-all duration-200"
@@ -47,7 +58,7 @@ const Header = () => {
       <div className="flex gap-2 items-center">
         {currentUser ? (
           <div className="flex gap-2 items-center">
-            <button
+            {/* <button
               type="button"
               className="hover:text-theme font-semibold dark:text-gray-100 transition duration-300 ease-in-out underline"
               onClick={() =>
@@ -57,10 +68,11 @@ const Header = () => {
               }
             >
               {currentPage == "/dashboard" ? "View Website" : "View Dashboard"}
-            </button>
-            <div
+            </button> */}
+            <button
               className="relative border dark:border-gray-600 rounded-xl cursor-pointer flex items-center gap-1 px-2 py-2"
               title={currentUser.data?.fullName}
+              onClick={handleToggleVisibility}
             >
               <img
                 src={currentUser.data?.profileImage}
@@ -68,14 +80,35 @@ const Header = () => {
                 alt="USERIMAGE"
               />
               <span className="text-sm">{currentUser.data?.fullName}</span>
-            </div>
-            <button
+            </button>
+            {isVisible && (
+              <div className="absolute w-40 top-16 right-4 z-10 bg-white dark:bg-gray-800 flex flex-col items-center gap-2 rounded p-2">
+                <button
+                  className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full"
+                  onClick={() => {
+                    navigate("/dashboard?tab=blogs");
+                  }}
+                >
+                  View Dashboard
+                </button>
+                <button className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full">
+                  View Profile
+                </button>
+                <button
+                  className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full"
+                  onClick={() => handleSignOut()}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+            {/* <button
               type="button"
               className="py-2 px-2 cursor-pointer bg-theme rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-theme hover:ring-2 hover:ring-theme hover:shadow-xl hover:shadow-theme focus:ring-green-300 focus:shadow-theme"
               onClick={() => handleSignOut()}
             >
               Logout
-            </button>
+            </button> */}
           </div>
         ) : (
           <div>
@@ -96,7 +129,7 @@ const Header = () => {
           </div>
         )}
         <button
-          className="p-2 border dark:border-gray-600 rounded-xl"
+          className="p-3 border dark:border-gray-600 rounded-xl"
           onClick={() => dispatch(toggleTheme())}
         >
           {theme == "dark" ? (

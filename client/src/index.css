@@ -11,6 +11,27 @@ body {
   cursor: default;
 }
 
+@layer utilities {
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: var(--primary);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: #379777;
+    /* border-radius: 100vh; */
+    border: 3px solid #379777;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background: #379777;
+  }
+}
+
 .logo,
 .font-primary {
   font-family: "Mochiy Pop One", sans-serif !important;
@@ -34,7 +55,7 @@ body {
 }
 
 .dark form svg,
-.dark main svg {
+.dark .card svg {
   stroke: rgb(243 244 246 / 1) !important;
 }
 

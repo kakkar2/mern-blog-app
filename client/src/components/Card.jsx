@@ -30,10 +30,10 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
   return (
     // bg-neutral-800
     <div
-      className="w-[17rem] h-80 border dark:border-gray-700 rounded-2xl text-gray-900 p-4 flex flex-col items-start justify-center gap-3 hover:shadow-xl hover:shadow-theme transition-shadow dark:text-white cursor-pointer"
+      className="w-[14rem] md:w-[16rem] lg:w-[17rem] h-80 border dark:border-gray-700 rounded-2xl text-gray-900 p-4 flex flex-col items-start justify-center gap-3 hover:shadow-xl hover:shadow-theme transition-shadow dark:text-white cursor-pointer card"
       onClick={() => navigate(`/blog/${slug}`)}
     >
-      <div className="w-60 h-40 bg-gray-300 rounded-2xl">
+      <div className="w-42 md:w-52 lg:w-60 h-40 bg-gray-300 rounded-2xl">
         <img
           //   src="https://cdn.pixabay.com/photo/2024/05/20/13/28/ai-generated-8775232_1280.png"
           src={thumbnail}

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { userRoute, blogRoute } from "./routes/index.js";
+import { userRoute, blogRoute, commentRouter } from "./routes/index.js";
 
 dotenv.config({
   path: "./.env",
@@ -27,6 +27,7 @@ app.use(express.static("public"));
 // routes
 app.use("/api/user", userRoute);
 app.use("/api/blog", blogRoute);
+app.use("/api/comment", commentRouter);
 
 // server running & database connection
 app.listen(process.env.PORT || 8000, () => {

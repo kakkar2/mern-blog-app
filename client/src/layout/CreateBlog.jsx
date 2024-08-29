@@ -21,12 +21,16 @@ const CreateBlog = () => {
 
   //taking image from user and uploading to the cloudinary
   const handleUpload = async () => {
-    if (!image) return console.log("image not found");
-    const imageFormData = new FormData();
-    imageFormData.append("file", image);
-    imageFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
-    const result = await handleImageUpload(imageFormData);
-    return result.secure_url;
+    try {
+      if (!image) return console.log("image not found");
+      const imageFormData = new FormData();
+      imageFormData.append("file", image);
+      imageFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+      const result = await handleImageUpload(imageFormData);
+      return result.secure_url;
+    } catch (error) {
+      console.log("error occur while uploading the image");
+    }
   };
 
   //generating local image so that user can see the image
@@ -53,13 +57,14 @@ const CreateBlog = () => {
       result.append(key, value);
     }
     if (image) {
-      const thumbnailUrl = await handleUpload();
-      result.append("thumbnail", thumbnailUrl);
+      const imageUrl = await handleUpload();
+      result.append("thumbnail", imageUrl);
       handleData(Object.fromEntries(result.entries()));
     } else {
       handleData(Object.fromEntries(result.entries()));
     }
   };
+
   return (
     <>
       <h2 className="font-semibold text-xl uppercase underline mb-5">
@@ -97,7 +102,7 @@ const CreateBlog = () => {
             <img
               src={localImageUrl}
               alt="POST_IMAGE"
-              className="w-full h-60 rounded-xl"
+              className="w-full h-60 rounded-xl object-cover"
               loading="lazy"
             />
           </div>
