@@ -4,10 +4,11 @@ import {
   handleLogoutUser,
   handleRegisterUser,
 } from "../controllers/users.controller.js";
+import verifyToken from "../middleware/verifyToken.middleware.js";
 
 const userRoute = Router();
 // Auth routes
-userRoute.post("/login", handleLoginUser);
+userRoute.post("/login", verifyToken, handleLoginUser);
 userRoute.post("/register", handleRegisterUser);
 userRoute.get("/logout", handleLogoutUser);
 

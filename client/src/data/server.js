@@ -19,6 +19,7 @@ const handleGETData = async (url) => {
   try {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${url}`, {
       method: "GET",
+      credentials: "include", // Important for sending cookies
     });
     const result = await response.json();
     return result;
