@@ -78,7 +78,7 @@ const handleLoginUser = async (req, res) => {
         .cookie("token", token, {
           httpOnly: true,
           secure: true,
-          sameSite: "None",
+          SameSite: "None",
         })
         .json({ success: true, data: rest, message: "login successfull" })
     );
