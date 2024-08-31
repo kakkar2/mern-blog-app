@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
+const Card = ({ title, category, thumbnail, slug, updatedAt, createdBy }) => {
   const navigate = useNavigate();
   const [timeAgo, setTimeAgo] = useState(null);
   //calculating time that how long the blog post is posted
@@ -30,7 +30,7 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
   return (
     // bg-neutral-800
     <div
-      className="w-[14rem] md:w-[16rem] lg:w-[17rem] h-80 border dark:border-gray-700 rounded-2xl text-gray-900 p-4 flex flex-col items-start justify-center gap-3 hover:shadow-xl hover:shadow-theme transition-shadow dark:text-white cursor-pointer card"
+      className="w-[14rem] md:w-[16rem] lg:w-[17rem] h-80 border dark:border-gray-700 rounded-2xl text-gray-900 p-4 flex flex-col items-start justify-center gap-3 hover:shadow-xl hover:shadow-theme transition-shadow dark:text-white cursor-pointer card overflow-hidden"
       onClick={() => navigate(`/blog/${slug}`)}
     >
       <div className="w-42 md:w-52 lg:w-60 h-40 bg-gray-300 rounded-2xl">
@@ -41,8 +41,13 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
           alt="POST-IMAGE"
         />
       </div>
-      <div className="">
-        <p className="font-extrabold capitalize mb-2">{title}</p>
+      <div>
+        <p
+          className="font-extrabold capitalize mb-2 line-clamp-1"
+          title={title}
+        >
+          {title}
+        </p>
         <p className="py-1">
           <span className="bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 cursor-pointer text-sm">
             #{category}
@@ -50,6 +55,16 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
         </p>
       </div>
       <div className="flex w-full items-center justify-between my-1">
+        <div className="flex items-center gap-1">
+          <div className="w-8 h-8">
+            <img
+              src={createdBy?.profileImage}
+              className="w-full h-full object-cover"
+              alt="PROFILE_IMAGE"
+            />
+          </div>
+          <span>{createdBy?.fullName}</span>
+        </div>
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +82,7 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
           </svg>
           <span className="mx-1 text-sm">{timeAgo}</span>
         </div>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -82,14 +97,8 @@ const Card = ({ title, category, thumbnail, slug, updatedAt }) => {
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
           <span className="mx-1 text-sm">10</span>
-        </div>
+        </div> */}
       </div>
-      {/* <button
-        className="bg-theme text-white font-extrabold p-2 px-6 rounded-xl hover:bg-green-500 transition-colors"
-        onClick={() => navigate(`/blog/${slug}`)}
-      >
-        View
-      </button> */}
     </div>
   );
 };

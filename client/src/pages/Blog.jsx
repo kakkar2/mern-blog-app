@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { handleGETData, handlePOSTData } from "../data/server";
 import { useSelector } from "react-redux";
-import { CommentItem } from "../components/index";
+import { BlogSkeleton, CommentItem } from "../components/index";
 
 const Blog = () => {
   const { slug } = useParams();
@@ -11,16 +11,20 @@ const Blog = () => {
   const [comments, setComments] = useState({});
   const [comment, setComment] = useState("");
 
+  const [loader, setLoader] = useState(false);
+
   //getting current login user info
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+    setLoader(true);
     const fetchData = async () => {
       const serverData = await handleGETData(`/blog/all-blogs?slug=${slug}`);
       if (serverData.success == true) {
         // console.log(serverData.blogs[0]);
         setBlog(serverData.blogs[0]);
         setBlogId(serverData.blogs[0]?._id);
+        setLoader(false);
       } else {
         console.log(serverData.message);
       }
@@ -70,8 +74,8 @@ const Blog = () => {
     }
   };
 
-  return blog.length > 0 ? (
-    <>Loading....</>
+  return loader ? (
+    <BlogSkeleton />
   ) : (
     <div className="w-4/5 mx-auto mt-10">
       <h1 className="font-bold capitalize mb-5 text-4xl text-center mb-3 font-primary">

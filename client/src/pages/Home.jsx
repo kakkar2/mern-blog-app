@@ -5,13 +5,16 @@ import { handleGETData } from "../data/server";
 const Home = () => {
   const [blogs, setBlog] = useState([]);
 
+  //how many skeleton that we want to show to user before page load
+  const loaderCount = 4;
+
   useEffect(() => {
     try {
       const fetchData = async () => {
         const serverData = await handleGETData("/blog/all-blogs");
         if (serverData?.success == true) {
           setBlog(serverData.blogs);
-          // console.log(serverData);
+          console.log(serverData);
         }
       };
       fetchData();
@@ -32,10 +35,9 @@ const Home = () => {
             blogs.slice(0, 8).map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
+              {Array.from({ length: loaderCount }).map((_, index) => (
+                <CardSkeleton key={index} />
+              ))}
             </>
           )}
         </div>
@@ -54,10 +56,9 @@ const Home = () => {
               .map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
+              {Array.from({ length: loaderCount }).map((_, index) => (
+                <CardSkeleton key={index} />
+              ))}
             </>
           )}
         </div>
@@ -76,10 +77,9 @@ const Home = () => {
               .map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
+              {Array.from({ length: loaderCount }).map((_, index) => (
+                <CardSkeleton key={index} />
+              ))}
             </>
           )}
         </div>

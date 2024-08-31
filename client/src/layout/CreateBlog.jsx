@@ -3,6 +3,7 @@ import "react-quill/dist/quill.snow.css";
 import { handlePOSTData, handleImageUpload } from "../data/server";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../components";
 
 const CreateBlog = () => {
   const categories = [
@@ -18,6 +19,7 @@ const CreateBlog = () => {
   const [formData, setFormData] = useState({});
   const [image, setImage] = useState(null);
   const [localImageUrl, setLocalImageUrl] = useState("");
+  const [loader, setLoader] = useState(false);
 
   //taking image from user and uploading to the cloudinary
   const handleUpload = async () => {
@@ -51,6 +53,7 @@ const CreateBlog = () => {
 
   //creating blog post
   const handleCreateBlog = async (e) => {
+    setLoader(true);
     e.preventDefault();
     const result = new FormData();
     for (let [key, value] of Object.entries(formData)) {
@@ -59,20 +62,23 @@ const CreateBlog = () => {
     if (image) {
       const imageUrl = await handleUpload();
       result.append("thumbnail", imageUrl);
-      handleData(Object.fromEntries(result.entries()));
+      await handleData(Object.fromEntries(result.entries()));
     } else {
-      handleData(Object.fromEntries(result.entries()));
+      await handleData(Object.fromEntries(result.entries()));
     }
+    setLoader(false);
   };
 
-  return (
+  return loader ? (
+    <Loader />
+  ) : (
     <>
       <h2 className="font-semibold text-xl uppercase underline mb-5">
         Create New Post
       </h2>
       <form
         onSubmit={handleCreateBlog}
-        className="w-4/5 mx-auto p-5 shadow-lg rounded-xl dark:shadow-2xl"
+        className="w-4/5 mx-auto p-5 shadow-lg rounded-xl dark:shadow-2xl relative"
         encType="multipart/form-data"
       >
         <label htmlFor="thumbnail">Thumbnail:</label>

@@ -49,10 +49,10 @@ const Header = () => {
     <div className="p-3 sticky top-0 z-10 bg-white flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gradient-to-r from-gray-900 to-gray-800 dark:text-gray-100">
       <div className="logo cursor-pointer">
         <h1
-          className="font-bold text-xl hover:text-theme transition-all duration-200"
+          className="font-bold text-xl hover:text-theme transition-all duration-200 uppercase tracking-wide"
           onClick={() => navigate("/")}
         >
-          {import.meta.env.VITE_WEBSITE_NAME}
+          {import.meta.env.VITE_WEBSITE_NAME}.
         </h1>
       </div>
       <div className="flex gap-2 items-center">
@@ -70,7 +70,7 @@ const Header = () => {
               {currentPage == "/dashboard" ? "View Website" : "View Dashboard"}
             </button> */}
             <button
-              className="relative border dark:border-gray-600 rounded-xl cursor-pointer flex items-center gap-1 px-2 py-2"
+              className="relative border dark:border-gray-600 rounded-xl cursor-pointer flex items-center gap-1 px-2 py-2 md:w-24 lg:w-28"
               title={currentUser.data?.fullName}
               onClick={handleToggleVisibility}
             >
@@ -84,18 +84,18 @@ const Header = () => {
             {isVisible && (
               <div className="absolute w-40 top-16 right-4 z-10 bg-white dark:bg-gray-800 flex flex-col items-center gap-2 rounded p-2">
                 <button
-                  className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full"
+                  className="py-1.5 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-700 w-full"
                   onClick={() => {
                     navigate("/dashboard?tab=blogs");
                   }}
                 >
                   View Dashboard
                 </button>
-                <button className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full">
+                <button className="py-1.5 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-700 w-full">
                   View Profile
                 </button>
                 <button
-                  className="py-1.5 dark:text-gray-100 hover:bg-gray-700 w-full"
+                  className="py-1.5 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-700 w-full"
                   onClick={() => handleSignOut()}
                 >
                   Logout

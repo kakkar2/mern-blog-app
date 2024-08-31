@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { handleDeleteData, handleGETData } from "../data/server";
 import { useSelector } from "react-redux";
+import { TableSkeleton } from "../components";
 
 const Table = ({ blogs, showMore, blogSetChanger, showMoreSetChanger }) => {
   const navigate = useNavigate();
@@ -226,7 +227,7 @@ const Table = ({ blogs, showMore, blogSetChanger, showMoreSetChanger }) => {
       )}
     </>
   ) : (
-    "loading..."
+    <TableSkeleton />
   );
 };
 
