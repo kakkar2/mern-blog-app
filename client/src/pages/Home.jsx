@@ -14,7 +14,7 @@ const Home = () => {
         const serverData = await handleGETData("/blog/all-blogs");
         if (serverData?.success == true) {
           setBlog(serverData.blogs);
-          console.log(serverData);
+          // console.log(serverData);
         }
       };
       fetchData();
