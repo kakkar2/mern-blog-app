@@ -8,7 +8,7 @@ import verifyToken from "../middleware/verifyToken.middleware.js";
 
 const userRoute = Router();
 // Auth routes
-userRoute.post("/login", verifyToken, handleLoginUser);
+userRoute.post("/login", handleLoginUser);
 userRoute.post("/register", handleRegisterUser);
 userRoute.get("/logout", handleLogoutUser);
 
