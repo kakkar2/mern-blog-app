@@ -79,7 +79,7 @@ const handleLoginUser = async (req, res) => {
           domain: process.env.CORS_ORIGIN,
           httpOnly: true,
           secure: true,
-          sameSite: "None",
+          SameSite: "None",
         })
         .json({ success: true, data: rest, message: "login successfull" })
     );

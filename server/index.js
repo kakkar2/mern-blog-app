@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
-    sameSite: "none",
+    SameSite: "none",
     secure: true,
   })
 );
