@@ -27,7 +27,6 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.static("public"));
 
 // routes
-app.use("/api/", document.write("Welcome to Mern  Blog App"));
 app.use("/api/user", userRoute);
 app.use("/api/blog", blogRoute);
 app.use("/api/comment", commentRouter);
