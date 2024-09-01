@@ -6,7 +6,7 @@ const Home = () => {
   const [blogs, setBlog] = useState([]);
 
   //how many skeleton that we want to show to user before page load
-  const loaderCount = 4;
+  const loaderCount = 5;
 
   useEffect(() => {
     try {
@@ -25,14 +25,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-4/5 mx-auto">
+    <div className="w-10/12 lg:w-11/12 md:w-10/12 mx-auto">
       <div className="mb-5">
         <div className="recent mb-3">
           <h1 className="font-primary fornt-semibold text-xl">Recent Blogs</h1>
         </div>
         <div className="flex items-center mx-auto flex-wrap md:gap-5 lg:gap-5">
           {blogs.length > 0 ? (
-            blogs.slice(0, 8).map((blog) => <Card key={blog.slug} {...blog} />)
+            blogs.slice(0, 10).map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>
               {Array.from({ length: loaderCount }).map((_, index) => (
@@ -52,7 +52,7 @@ const Home = () => {
           {blogs.length > 0 ? (
             blogs
               .filter((blog) => blog.category == "Coding")
-              .slice(0, 4)
+              .slice(0, 6)
               .map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>
@@ -73,7 +73,7 @@ const Home = () => {
           {blogs.length > 0 ? (
             blogs
               .filter((blog) => blog.category == "Food")
-              .slice(0, 4)
+              .slice(0, 6)
               .map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
             <>

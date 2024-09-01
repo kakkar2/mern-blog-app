@@ -76,6 +76,7 @@ const handleLoginUser = async (req, res) => {
         .status(200)
         // .cookie("token", token, { httpOnly: true })
         .cookie("token", token, {
+          domain: process.env.CORS_ORIGIN,
           httpOnly: true,
           secure: true,
           sameSite: "None",
