@@ -71,18 +71,10 @@ const handleLoginUser = async (req, res) => {
     // removing password field from last output
     const { password: pass, ...rest } = user._doc;
 
-    return (
-      res
-        .status(200)
-        // .cookie("token", token, { httpOnly: true })
-        .cookie("token", token, {
-          domain: process.env.CORS_ORIGIN,
-          httpOnly: true,
-          secure: true,
-          SameSite: "None",
-        })
-        .json({ success: true, data: rest, message: "login successfull" })
-    );
+    return res
+      .status(200)
+      .cookie("token", token, { httpOnly: true })
+      .json({ success: true, data: rest, message: "login successfull" });
   } catch (error) {
     return res.status(500).json({
       success: false,
