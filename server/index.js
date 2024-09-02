@@ -18,7 +18,7 @@ app.use(
     credentials: true,
   })
 );
-// app.set("trust proxy", 1);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -29,7 +29,7 @@ app.use("/api/blog", blogRoute);
 app.use("/api/comment", commentRouter);
 
 // server running & database connection
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT, () => {
   mongoose
     .connect(process.env.DATABASE_URL)
     .then(() =>
