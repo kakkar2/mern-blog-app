@@ -29,18 +29,18 @@ app.use("/api/blog", blogRoute);
 app.use("/api/comment", commentRouter);
 
 // server running & database connection
-app.listen(process.env.PORT, async() => {
+app.listen(process.env.PORT, () => {
  try {
-   await mongoose
+    mongoose
       .connect(process.env.DATABASE_URL)
-      // .then(() =>
-      //   console.log(
-      //     `SERVER RUNNING AT PORT ${process.env.PORT}. MONGODB CONNECTED.`
-      //   )
-      // )
-      // .catch((error) =>
-      //   console.log("ERROR OCCUR WHILE CONNECTING TO DATABASE", error.message)
-      // );
+      .then(() =>
+        console.log(
+          `SERVER RUNNING AT PORT ${process.env.PORT}. MONGODB CONNECTED.`
+        )
+      )
+      .catch((error) =>
+        console.log("ERROR OCCUR WHILE CONNECTING TO DATABASE", error.message)
+      );
   } catch (error) {
     console.log(error.message);
   }
