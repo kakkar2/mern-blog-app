@@ -29,9 +29,9 @@ app.use("/api/blog", blogRoute);
 app.use("/api/comment", commentRouter);
 
 // server running & database connection
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, async() => {
  try {
-    mongoose
+   await mongoose
       .connect(process.env.DATABASE_URL)
       .then(() =>
         console.log(
