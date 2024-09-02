@@ -17,6 +17,7 @@ const handlePOSTData = async (url, data, method = "POST") => {
 
 const handleGETData = async (url) => {
   try {
+    console.log(`${import.meta.env.VITE_BACKEND_URL}${url}`);
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${url}`, {
       method: "GET",
       credentials: "include", // Important for sending cookies

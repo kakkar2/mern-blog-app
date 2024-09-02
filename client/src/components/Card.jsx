@@ -59,7 +59,7 @@ const Card = ({ title, category, thumbnail, slug, updatedAt, createdBy }) => {
           <div className="w-8 h-8">
             <img
               src={createdBy?.profileImage}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-xl"
               alt="PROFILE_IMAGE"
             />
           </div>
