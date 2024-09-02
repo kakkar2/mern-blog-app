@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { userRoute, blogRoute, commentRouter } from "./routes/index.js";
+import path from "path";
 
 dotenv.config({
   path: "./.env",
@@ -19,10 +20,16 @@ app.use(
   })
 );
 // app.set("trust proxy", 1);
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
-app.use(express.static("public"));
+app.use(cookieParser());
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 // routes
 app.use("/api/user", userRoute);
