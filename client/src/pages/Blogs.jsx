@@ -52,7 +52,7 @@ const Blogs = () => {
           onClick={() => navigate("/dashboard?tab=blog-add-new")}
           className="py-2 px-2 cursor-pointer bg-theme rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-theme hover:ring-2 hover:ring-theme hover:shadow-xl hover:shadow-theme focus:ring-green-300 focus:shadow-theme"
         >
-          Add New Blog
+          Add New
         </button>
       </div>
       {pages[tab]}

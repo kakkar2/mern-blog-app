@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  handleAllUser,
   handleLoginUser,
   handleLogoutUser,
   handleRegisterUser,
@@ -11,5 +12,7 @@ const userRoute = Router();
 userRoute.post("/login", handleLoginUser);
 userRoute.post("/register", handleRegisterUser);
 userRoute.get("/logout", handleLogoutUser);
+//get all users
+userRoute.get("/", verifyToken, handleAllUser);
 
 export default userRoute;

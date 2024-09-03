@@ -43,7 +43,7 @@ const Blog = () => {
   };
 
   const fetchComment = async (id) => {
-    console.log(id);
+    // console.log(id);
     const serverData = await handleGETData(`/comment/${id}`);
     if (serverData.success == true) {
       setComments(serverData);
@@ -69,7 +69,7 @@ const Blog = () => {
     if (serverData.success == false) {
       console.log(serverData.message);
     } else {
-      // fetchComment();
+      fetchComment(blogId);
       setComment("");
     }
   };
@@ -125,8 +125,7 @@ const Blog = () => {
       ></div>
       <div className="border-t dark:border-gray-600 mt-2">
         <h1 className="font-bold font-primary text-2xl mt-4">
-          Comments ({comments != {} ? comments?.totalComments : 0}){" "}
-          {console.log(comments)}
+          Comments ({comments != {} ? comments?.totalComments : 0})
         </h1>
         {currentUser && (
           <div className="relative w-full bg-white dark:bg-gray-800 rounded-lg border pt-4 mx-auto mt-10 dark:border-gray-600">

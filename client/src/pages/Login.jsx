@@ -1,4 +1,4 @@
-// import loginImage from "../assets/login.png";
+import loginImage from "../assets/login.png";
 import { handlePOSTData } from "../data/server.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -42,16 +42,16 @@ const Login = () => {
     <div className="flex justify-center items-center mx-auto">
       {message != null && <Alert {...message} />}
       <div className="flex items-center flex-col gap-2 lg:gap-0 lg:flex-row shadow-xl rounded-2xl">
-        {/* <div className="w-1/2">
+        <div className="w-1/2">
           <img
             loading="lazy"
-            class="w-full lg:w-3/4 mx-auto"
+            class="w-full lg:w-3/4 mx-auto drop-shadow-2xl"
             src={loginImage}
             alt="LOGIN IMAGE"
           />
-        </div> */}
-        {/* <div className=" w-full lg:w-1/2 mx-auto p-4"> */}
-        <div className=" w-full mx-auto p-4">
+        </div>
+        <div className=" w-full lg:w-1/2 mx-auto p-4">
+          {/* <div className=" w-full mx-auto p-4"> */}
           <div className="logo text-center text-3xl mb-10">
             <h1 className="font-bold">{import.meta.env.VITE_WEBSITE_NAME}</h1>
           </div>

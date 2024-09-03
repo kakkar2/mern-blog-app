@@ -40,7 +40,7 @@ const Table = ({ blogs, showMore, blogSetChanger, showMoreSetChanger }) => {
     }
   };
 
-  return blogs.length >= 1 ? (
+  return blogs != [] ? (
     <>
       <div className="flex flex-col">
         <div className=" overflow-x-auto">
@@ -125,7 +125,7 @@ const Table = ({ blogs, showMore, blogSetChanger, showMoreSetChanger }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-300">
-                  {blogs != [] ? (
+                  {blogs.length > 0 ? (
                     blogs.map((blog, index) => (
                       <tr
                         className="bg-white transition-all duration-500 hover:bg-gray-50 dark:bg-gray-800"

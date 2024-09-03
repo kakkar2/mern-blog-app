@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SideBar } from "../components/index";
-import { Profile, Blogs, Comments } from "../pages/index";
+import { Profile, Blogs, Users } from "../pages/index";
 import { CreateBlog, EditBlog } from "../layout/index";
 
 const Dashboard = () => {
@@ -22,7 +22,7 @@ const Dashboard = () => {
     blogs: <Blogs tab={tab} />,
     "blog-add-new": <CreateBlog />,
     "edit-blog": <EditBlog />,
-    comments: <Comments />,
+    users: <Users />,
   };
   return (
     <div className="flex flex-col md:flex-row items-stretch gap-2">

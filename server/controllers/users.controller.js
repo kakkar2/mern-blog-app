@@ -90,7 +90,6 @@ const handleLogoutUser = async (req, res) => {
     .status(200)
     .json({ success: true, message: "logout successfully" });
 };
-
 //update user details
 const handleUpdateUser = async (req, res) => {
   try {
@@ -153,9 +152,28 @@ const handleUpdateUser = async (req, res) => {
   }
 };
 
+//fetch all users
+const handleAllUser = async (req, res) => {
+  try {
+    const { id, role } = req.user;
+    if (!id)
+      return res.status(404).json({ success: false, message: "Unauthorized" });
+    if (!role == "ADMIN")
+      return res.status(400).json({ success: false, message: "Unauthorized" });
+    const sortDirection = req.query.order === "asc" ? 1 : -1;
+    const data = await User.find({}).sort({ updatedAt: sortDirection });
+    return res
+      .status(200)
+      .json({ success: true, data, message: "Users fetched successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export {
   handleLoginUser,
   handleRegisterUser,
   handleLogoutUser,
   handleUpdateUser,
+  handleAllUser,
 };

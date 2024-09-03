@@ -21,7 +21,7 @@ const blogSchema = new Schema(
     category: {
       type: String,
       trim: true,
-      enum: ["Coding", "Technology", "Food", "lifestyle", "Vehicles", "others"],
+      enum: ["Coding", "Technology", "Food", "Lifestyle", "Vehicles", "others"],
       default: "others",
     },
     slug: {

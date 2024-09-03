@@ -32,26 +32,28 @@ const SideBar = ({ tab }) => {
             </button>
           </div>
           <div className="flex flex-col flex-1 gap-3">
-            {/* <a
-                href="#"
-                className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl"
+            <button
+              onClick={() => navigate("/dashboard?tab=home")}
+              className={`flex items-center ${
+                tab == "home" && "bg-gray-400 bg-opacity-25"
+              } px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                style={{ marginRight: "8px" }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  style={{ marginRight: "8px" }}
-                >
-                  <path
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6l2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Home
-              </a> */}
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6l2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Home
+            </button>
             <button
               type="button"
               onClick={() => navigate("/dashboard?tab=blogs")}
@@ -80,9 +82,9 @@ const SideBar = ({ tab }) => {
             {currentUser?.data?.role == "ADMIN" && (
               <button
                 type="button"
-                onClick={() => navigate("/dashboard?tab=profile")}
+                onClick={() => navigate("/dashboard?tab=users")}
                 className={`flex items-center ${
-                  tab == "profile" && "bg-gray-400 bg-opacity-25"
+                  tab == "users" && "bg-gray-400 bg-opacity-25"
                 } px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl`}
               >
                 <svg
@@ -100,7 +102,7 @@ const SideBar = ({ tab }) => {
                 Users
               </button>
             )}
-            <button
+            {/* <button
               type="button"
               onClick={() => navigate("/dashboard?tab=comments")}
               className={`flex items-center ${
@@ -120,7 +122,7 @@ const SideBar = ({ tab }) => {
                 />
               </svg>
               comments
-            </button>
+            </button> */}
             <button
               type="button"
               onClick={() => navigate("/dashboard?tab=profile")}
@@ -142,6 +144,32 @@ const SideBar = ({ tab }) => {
               </svg>
               Profile
             </button>
+            {currentUser?.data?.role == "ADMIN" && (
+              <button
+                type="button"
+                onClick={() => navigate("/dashboard?tab=settings")}
+                className={`flex items-center ${
+                  tab == "settings" && "bg-gray-400 bg-opacity-25"
+                } px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 32 32"
+                  style={{ marginRight: "8px" }}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                Settings
+              </button>
+            )}
           </div>
         </nav>
       </div>

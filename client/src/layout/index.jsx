@@ -5,6 +5,7 @@ import CreateBlog from "./CreateBlog";
 import EditBlog from "./EditBlog";
 import Table from "./Table";
 import UserTable from "./userTable";
+import commentTable from "./commentTable";
 import ThemeModeProvider from "./ThemeModeProvider";
 
 export {
@@ -16,4 +17,5 @@ export {
   UserTable,
   EditBlog,
   ThemeModeProvider,
+  commentTable,
 };
