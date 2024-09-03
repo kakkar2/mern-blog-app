@@ -1,4 +1,3 @@
-import signupImage from "../assets/Signup.png";
 import { handlePOSTData } from "../data/server.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -47,7 +46,7 @@ const Signup = () => {
           <img
             loading="lazy"
             class="w-full lg:w-3/4 mx-auto drop-shadow-2xl"
-            src={signupImage}
+            src="https://res.cloudinary.com/dmsv2aww5/image/upload/v1725376982/signup_ofvw1l.png"
             alt="LOGIN IMAGE"
           />
         </div>
