@@ -73,7 +73,11 @@ const handleLoginUser = async (req, res) => {
 
     return res
       .status(200)
-      .cookie("token", token, { httpOnly: true })
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
       .json({ success: true, data: rest, message: "login successfull" });
   } catch (error) {
     return res.status(500).json({
