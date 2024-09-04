@@ -6,14 +6,14 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return {
     plugins: [react()],
-    server: {
-      proxy: {
-        "/api": {
-          target: `${env.VITE_BASE_BACKEND_URL}`,
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
+    // server: {
+    //   proxy: {
+    //     "/api": {
+    //       target: `${env.VITE_BASE_BACKEND_URL}`,
+    //       changeOrigin: true,
+    //       secure: false,
+    //     },
+    //   },
+    // },
   };
 });
