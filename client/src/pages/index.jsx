@@ -6,5 +6,6 @@ import Profile from "./Profile";
 import Users from "./Users";
 import Blogs from "./Blogs";
 import Blog from "./Blog";
+import Search from "./Search";
 
-export { Dashboard, Home, Login, Signup, Profile, Users, Blogs, Blog };
+export { Dashboard, Home, Login, Signup, Profile, Users, Blogs, Blog, Search };

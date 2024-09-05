@@ -32,7 +32,7 @@ const SideBar = ({ tab }) => {
             </button>
           </div>
           <div className="flex flex-col flex-1 gap-3">
-            <button
+            {/* <button
               onClick={() => navigate("/dashboard?tab=home")}
               className={`flex items-center ${
                 tab == "home" && "bg-gray-400 bg-opacity-25"
@@ -53,7 +53,7 @@ const SideBar = ({ tab }) => {
                 />
               </svg>
               Home
-            </button>
+            </button> */}
             <button
               type="button"
               onClick={() => navigate("/dashboard?tab=blogs")}

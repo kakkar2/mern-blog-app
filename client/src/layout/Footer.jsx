@@ -7,14 +7,15 @@ const Footer = () => {
         <h1 className="font-bold text-md hover:text-theme transition-all duration-200 uppercase tracking-wide">
           {import.meta.env.VITE_WEBSITE_NAME}.
         </h1>
-        {/* <span className="text-sm font-normal mx-1">Made With ❤️ In India.</span> */}
       </div>
       <div>
         <ul className="flex items-center gap-2">
-          <li className="hover:text-theme cursor-pointer">
+          <li className="hover:text-theme cursor-pointer text-sm md:text-md lg:text-md">
             Terms & Conditions
           </li>
-          <li className="hover:text-theme cursor-pointer">Privacy Policy</li>
+          <li className="hover:text-theme cursor-pointer text-sm md:text-md lg:text-md">
+            Privacy Policy
+          </li>
         </ul>
       </div>
     </div>

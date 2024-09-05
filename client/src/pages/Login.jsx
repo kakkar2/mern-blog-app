@@ -145,6 +145,7 @@ const Login = () => {
             <button
               type="button"
               className="font-medium text-theme hover:text-green-500"
+              onClick={() => navigate("/signup")}
             >
               Sign up
             </button>

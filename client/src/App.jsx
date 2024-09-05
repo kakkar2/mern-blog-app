@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header, Footer, PrivateRoute } from "./layout/index";
-import { Blog, Dashboard, Home, Login, Signup } from "./pages/index";
+import { Blog, Dashboard, Home, Login, Search, Signup } from "./pages/index";
 import "./App.css";
 import { useEffect } from "react";
 
@@ -21,6 +21,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/blog/:slug" element={<Blog />} />
+            <Route path="/search" element={<Search />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>

@@ -14,6 +14,7 @@ const Header = () => {
   const currentPage = location.pathname;
   //to show or unshow other options
   const [isVisible, setIsVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -22,7 +23,6 @@ const Header = () => {
       const checkLogout = confirm("Are you sure you want to logout?");
       if (checkLogout) {
         const serverData = await handleGETData("/user/logout");
-        console.log(serverData);
         if (serverData.success == true) {
           dispatch(signoutSuccess());
           return setTimeout(() => {
@@ -45,30 +45,52 @@ const Header = () => {
     if (isVisible) setIsVisible(!isVisible);
   }, [currentPage]);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (searchQuery != "" && searchQuery != " ") {
+      navigate(`/search?query=${searchQuery}`);
+      // return setSearchQuery("");
+    }
+  };
+
   return (
     <div className="p-3 sticky top-0 z-10 bg-white flex justify-between items-center border-b dark:border-gray-600 shadow-lg dark:bg-gradient-to-r from-gray-900 to-gray-800 dark:text-gray-100">
       <div className="logo cursor-pointer">
         <h1
-          className="font-bold text-xl hover:text-theme transition-all duration-200 uppercase tracking-wide"
+          className="font-bold text-md md:text-lg lg:text-xl hover:text-theme transition-all duration-200 uppercase tracking-wide"
           onClick={() => navigate("/")}
         >
           {import.meta.env.VITE_WEBSITE_NAME}.
         </h1>
       </div>
       <div className="flex gap-2 items-center">
+        <div className="relative hidden md:block lg:block">
+          <form onSubmit={handleSearch}>
+            <input
+              placeholder="Search..."
+              className="input shadow border-gray-300 px-5 py-3 rounded-xl w-56 transition-all focus:w-64 outline-none dark:bg-gray-800"
+              name="search"
+              type="search"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <svg
+              className="size-6 absolute top-3 right-3 text-gray-500"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              ></path>
+            </svg>
+          </form>
+        </div>
         {currentUser?.data ? (
           <div className="flex gap-2 items-center">
-            {/* <button
-              type="button"
-              className="hover:text-theme font-semibold dark:text-gray-100 transition duration-300 ease-in-out underline"
-              onClick={() =>
-                currentPage == "/dashboard"
-                  ? navigate("/")
-                  : navigate("/dashboard?tab=blogs")
-              }
-            >
-              {currentPage == "/dashboard" ? "View Website" : "View Dashboard"}
-            </button> */}
             <button
               className="relative border dark:border-gray-600 rounded-xl cursor-pointer flex items-center gap-1 px-2 py-2 md:w-24 lg:w-28"
               title={currentUser.data?.fullName}
@@ -102,13 +124,6 @@ const Header = () => {
                 </button>
               </div>
             )}
-            {/* <button
-              type="button"
-              className="py-2 px-2 cursor-pointer bg-theme rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-theme hover:ring-2 hover:ring-theme hover:shadow-xl hover:shadow-theme focus:ring-green-300 focus:shadow-theme"
-              onClick={() => handleSignOut()}
-            >
-              Logout
-            </button> */}
           </div>
         ) : (
           <div>
@@ -121,7 +136,7 @@ const Header = () => {
             </button>
             <button
               type="button"
-              className="py-2 px-2 cursor-pointer bg-theme rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-theme hover:ring-2 hover:ring-theme hover:shadow-xl hover:shadow-theme focus:ring-green-300 focus:shadow-theme mx-1"
+              className="py-2 px-2 cursor-pointer bg-theme rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-theme hover:ring-2 hover:ring-theme hover:shadow-xl hover:shadow-theme focus:ring-green-300 focus:shadow-theme mx-1 hidden lg:inline"
               onClick={() => navigate("/signup")}
             >
               Sign Up

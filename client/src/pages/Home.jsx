@@ -25,12 +25,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-10/12 lg:w-11/12 md:w-10/12 mx-auto">
+    <div className="w-full lg:w-11/12 md:w-10/12 mx-auto">
       <div className="mb-5">
         <div className="recent mb-3">
           <h1 className="font-primary fornt-semibold text-xl">Recent Blogs</h1>
         </div>
-        <div className="flex items-center mx-auto flex-wrap md:gap-5 lg:gap-5">
+        <div className="flex items-center mx-auto justify-center flex-wrap gap-3 md:gap-5 lg:gap-5">
           {blogs.length > 0 ? (
             blogs.slice(0, 10).map((blog) => <Card key={blog.slug} {...blog} />)
           ) : (
@@ -48,7 +48,7 @@ const Home = () => {
             Recent Coding Blogs
           </h1>
         </div>
-        <div className="flex items-center mx-auto flex-wrap md:gap-5 lg:gap-5">
+        <div className="flex items-center mx-auto justify-center flex-wrap gap-3 md:gap-5 lg:gap-5">
           {blogs.length > 0 ? (
             blogs
               .filter((blog) => blog.category == "Coding")
@@ -69,7 +69,7 @@ const Home = () => {
             Recent Food Blogs
           </h1>
         </div>
-        <div className="flex items-center mx-auto flex-wrap md:gap-5 lg:gap-5">
+        <div className="flex items-center mx-auto justify-center flex-wrap gap-3 md:gap-5 lg:gap-5">
           {blogs.length > 0 ? (
             blogs
               .filter((blog) => blog.category == "Food")

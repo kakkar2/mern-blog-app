@@ -78,7 +78,7 @@ const Blog = () => {
     <BlogSkeleton />
   ) : (
     <div className="w-4/5 mx-auto mt-10">
-      <h1 className="font-bold capitalize mb-5 text-4xl text-center mb-3 font-primary">
+      <h1 className="font-bold capitalize mb-5 lg:text-4xl text-xl text-center mb-3 font-primary">
         {blog && blog.title}
       </h1>
       <div className="flex justify-center gap-2 flex-wrap p-4 mb-5">
@@ -89,14 +89,14 @@ const Blog = () => {
       <div className="w-full h-96 mb-3">
         <img
           src={blog && blog.thumbnail}
-          className="mx-auto w-full h-full object-cover"
+          className="mx-auto w-full h-full lg:object-cover object-fill"
           alt="BLOG-IMAGE"
         />
       </div>
       <div className="flex items-center justify-between py-3 border-b border-slate-500 mb-5">
         <div className="flex items-center gap-1 lg:gap-2">
           <div className="flex items-center gap-1 lg:gap-2 py-1.5">
-            <div className="w-5 h-5 lg:w-10 lg:h-10 rounded-xl bg-gray-300">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-gray-300">
               <img
                 src={blog && blog.createdBy?.profileImage}
                 className="w-full h-full object-cover rounded-xl"
@@ -109,8 +109,8 @@ const Blog = () => {
               </p>
             </div>
           </div>
-          <span className="mx-1">|</span>
-          <span className="text-sm md:text-md lg:text-md">
+          <span className="mx-1 hidden md:lg-block lg:block">|</span>
+          <span className="text-sm md:text-md lg:text-md hidden md:lg-block lg:block">
             Created On: {new Date(blog.createdAt).toLocaleDateString()}
           </span>
         </div>
