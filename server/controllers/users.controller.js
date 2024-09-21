@@ -81,7 +81,7 @@ const handleLoginUser = async (req, res) => {
           secure: true,
           sameSite: "none",
         },
-        { domain: "https://mern-blog-app-ra9u.onrender.com" }
+        { domain: ".onrender.com" }
       )
       .json({
         success: true,
