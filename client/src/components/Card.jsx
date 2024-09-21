@@ -55,7 +55,7 @@ const Card = ({ title, category, thumbnail, slug, updatedAt, createdBy }) => {
         </p>
       </div>
       <div className="flex w-full items-center justify-between my-1">
-        <div className="flex items-center gap-1 hidden lg:block">
+        <div className="flex items-center gap-1 hidden lg:flex">
           <div className="w-8 h-8">
             <img
               src={createdBy?.profileImage}
